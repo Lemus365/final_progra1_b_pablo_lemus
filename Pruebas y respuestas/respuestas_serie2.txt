@@ -60,7 +60,7 @@ Use inteligencia artificial como herramienta de apoyo en lo siguiente:
   - Los colores del menu en consola (Console.ForegroundColor) para que
     se vea mas presentable.
 
-  - Este documento de reflexion: le pedi que me ayudara a redactarlo de
+  - Este documento: le pedi que me ayudara a redactarlo de
     forma clara y ordenada
 
 En todos los casos, yo fui el que tomo las decisiones de que hacer.
