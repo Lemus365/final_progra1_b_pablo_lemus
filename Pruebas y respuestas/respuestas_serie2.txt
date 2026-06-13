@@ -1,0 +1,68 @@
+SERIE II:
+
+COMO PLANTEE LA SOLUCION
+
+Antes de escribir cualquier linea de codigo, lo primero que hice fue
+leer bien el enunciado y pensar en tres preguntas:
+
+  - Que datos necesito guardar?
+  - Que operaciones tiene que hacer el programa?
+  - Como tiene que estar organizado?
+
+Con eso claro, arme un mapa mental (que adjunto en el proyecto) para
+visualizar todo antes de tocar el teclado. El mapa lo dividi en 6 ramas:
+
+  1. Proyectos      -> separar Hotel.Modelos (logica) de Hotel.App (consola)
+  2. Clases         -> Reserva.cs para la entidad, Hotel.cs para la logica
+  3. Coleccion      -> List<Reserva> para guardar todo en memoria
+  4. Persistencia   -> archivo reservas.txt para no perder los datos
+  5. Operaciones    -> las 4 que pide el enunciado
+  6. Modificadores  -> public, private y static segun corresponda
+
+La idea del mapa fue que antes de codificar ya supiera exactamente donde
+iba cada cosa, eso me ahorro mucho tiempo porque no tuve que estar
+reescribiendo clases a mitad del camino.
+
+
+ESTRUCTURA QUE DECIDI USAR Y POR QUE
+
+Separe el proyecto en dos partes: una biblioteca de clases (Hotel.Modelos)
+y una aplicacion de consola (Hotel.App). Esto lo hice porque si en algun
+momento el proyecto crece y necesita una interfaz grafica o web, la logica
+ya esta separada y no hay que tocarla.
+
+Para almacenar las reservas use List<Reserva> porque es dinamica, permite
+agregar elementos sin saber cuantos van a ser, y se puede recorrer con
+foreach o con for dependiendo de lo que necesite.
+
+
+QUE PARTES HICE MANUALMENTE
+
+Estas partes las trabaje yo directamente:
+
+  - Decidir separar en dos proyectos (no lo dice el enunciado tan directo,
+    tuve que interpretarlo)
+  - Elegir List<Reserva> como estructura de datos
+  - El esqueleto inicial de Hotel.cs
+  - Probar el programa en Visual Studio y leer los errores de compilacion
+  - Ajustar la logica del menu para que los errores no rompan la aplicacion
+    (el try/catch en Program.cs)
+
+
+QUE PARTES USE IA (Claude)
+
+Use inteligencia artificial como herramienta de apoyo en lo siguiente:
+
+  - El mapa mental: le describi la estructura del proyecto y me ayudo a
+    organizarlo visualmente con colores y ramas por categoria. Yo defini
+    que queria mostrar, iba a perder tiempo necesario si yo hacia eso manual.
+
+  - Los colores del menu en consola (Console.ForegroundColor) para que
+    se vea mas presentable.
+
+  - Este documento de reflexion: le pedi que me ayudara a redactarlo de
+    forma clara y ordenada
+
+En todos los casos, yo fui el que tomo las decisiones de que hacer.
+La IA fue una herramienta para acelerar la escritura. Cada vez que me genero algo, lo lei, lo entendi y decidi si
+lo usaba o lo cambiaba.

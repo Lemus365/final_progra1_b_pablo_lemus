@@ -1,0 +1,80 @@
+SERIE III:
+
+
+1. ERRORES ENCONTRADOS Y CÓMO SOLUCIONARLOS
+
+ERROR 1 — Typo en palabra clave
+  MAL:  public structur Reserva
+  BIEN: public struct Reserva
+  Por qué: "structur" no es una palabra clave válida en C#.
+
+ERROR 2 — Separador incorrecto en parámetros del constructor
+  MAL:  public Reserva(string cliente; int habitacion)
+  BIEN: public Reserva(string cliente, int habitacion)
+  Por qué: Los parámetros se separan con coma (,), no con punto y coma (;).
+
+ERROR 3 — Nombre de campo inconsistente
+  MAL:  Habitacion = habitacion;   (el campo se llama Habitaciones)
+  BIEN: Habitaciones = habitaciones;
+  Por qué: El campo declarado es "Habitaciones" (plural), pero el constructor
+           referencia "Habitacion" que no existe, causando error de compilación.
+
+ERROR 4 — Constructor incompleto
+  MAL:  Solo inicializa Cliente y Habitaciones.
+  BIEN: Debe inicializar también Noches y Huespedes, o al menos asignarles
+        un valor por defecto, ya que en un struct todos los campos deben
+        quedar inicializados.
+
+ERROR 5 — Método estático accede a miembros de instancia
+  MAL:  public static double CalcularCosto(double precioPorNoche) {
+            return Noches * precioNoche;
+        }
+  BIEN: public double CalcularCosto(double precioPorNoche) {
+            return Noches * precioPorNoche;
+        }
+  Por qué (a): Un método static no puede acceder a "this.Noches" porque
+               no tiene referencia a ninguna instancia.
+  Por qué (b): El parámetro se llama "precioPorNoche" pero dentro del cuerpo
+               se usa "precioNoche" — nombre diferente, error de compilación.
+
+
+2. DIFERENCIA SI RESERVA FUERA UNA CLASE EN LUGAR DE STRUCT
+
+ASPECTO              STRUCT (actual)              CLASS
+Tipo                 Valor                        Referencia
+Almacenamiento       Stack                        Heap
+Asignación           Copia todos los campos       Copia la referencia
+Herencia             No soportada                 Sí soportada
+Puede ser null       No                           Sí
+
+
+3. ¿LOS MODIFICADORES DE ACCESO SON CORRECTOS?
+
+No, no son correctos
+
+Todos los campos son "public", lo que viola el principio de
+encapsulamiento (OOP). Esto permite que cualquier código externo
+modifique directamente campos como Noches o Huespedes sin ningún
+tipo de validación, lo cual es peligroso.
+
+Lo correcto es declarar los campos como "private" y exponer
+propiedades con lógica de validación:
+
+  private int noches;
+  public int Noches {
+      get => noches;
+      set {
+
+
+
+4. ¿ESTÁ CORRECTAMENTE ESTRUCTURADO PARA MEJORAS FUTURAS?
+
+No, por las siguientes razones:
+
+a) Campos públicos en lugar de propiedades no permiten agregar lógica de validación
+   en el futuro sin romper el código que ya los usa.
+
+b) Struct en lugar de class no soporta herencia, lo que impide crear jerarquías.
+
+c) Constructor incompleto, no forzar la inicialización de todos los campos desde el
+   constructor hace que el objeto pueda quedar en estado inválido
